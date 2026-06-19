@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>FIFA Arena Live Stream</title>
+    <style>
+        :root { --primary: #f20574; --bg: #0a0a0a; --card-bg: #141414; --text: #ffffff; --live-red: #ff0000; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); padding: 1.5rem; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        
+        .live-indicator { background: rgba(255, 0, 0, 0.1); color: var(--live-red); padding: 0.4rem 0.8rem; border-radius: 20px; font-weight: bold; font-size: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+        .dot { height: 8px; width: 8px; background-color: var(--live-red); border-radius: 50%; animation: pulse 1.5s infinite; }
+        
+        .main-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+        .player-wrapper { background: #000; border-radius: 16px; overflow: hidden; border: 1px solid #333; }
+        .video-box { position: relative; padding-bottom: 56.25%; }
+        .video-box iframe { position: absolute; width: 100%; height: 100%; border: 0; }
+
+        .ad-slot { background: var(--card-bg); border: 1px dashed #333; padding: 1rem; text-align: center; border-radius: 12px; margin-bottom: 1rem; }
+        
+        .donation-box { background: var(--card-bg); border-radius: 16px; border: 1px solid #333; padding: 1rem; text-align: center; }
+        .donation-box img { max-width: 120px; border-radius: 8px; margin-top: 0.5rem; }
+
+        .servers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.8rem; margin-top: 1.5rem; }
+        .server-card { background: var(--card-bg); padding: 0.8rem; border-radius: 10px; cursor: pointer; border: 1px solid #333; text-align: center; transition: 0.2s; }
+        .server-card:hover, .server-card.active { border-color: var(--primary); background: #1a0a12; }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        @media (max-width: 768px) { .main-layout { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>FIFA Arena</h1>
+        <div class="live-indicator"><span class="dot"></span> LIVE NOW</div>
+    </div>
+
+    <div class="ad-slot"> </div>
+
+    <div class="main-layout">
+        <div class="player-wrapper">
+            <div class="video-box">
+                <iframe id="liveIframe" src="about:blank" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="donation-box">
+            <h3>Support Us</h3>
+            <img src="https://images.v-gen.ai/contentFetch/uploaded:4de72ece-2532-4b9b-97eb-ac5b388a1f2c.jpg-2238e40c-29ce-4e8b-8042-e92469eafb2e" alt="QR">
+        </div>
+    </div>
+
+    <div class="ad-slot"> </div>
+
+    <div class="servers-grid" id="serversGrid"></div>
+</div>
+
+<script>
+    const servers = [
+        { name:"DSports HD", url:"https://stream-xhd.com/live1.php?stream=dsports" },
+        { name:"DIRECTV", url:"https://canalesdeportivos.net/directvsports.php" },
+        { name:"TAMAV T1", url:"https://tabav.mov/tamav/?t=1" },
+        { name:"TAMAV T2", url:"https://tabav.mov/tamav/?t=2" },
+        { name:"TAMAV T3", url:"https://tabav.mov/tamav/?t=3" },
+        { name:"DLHD PK", url:"https://dlhd.pk/stream/stream-116.php" },
+        { name:"CARTELIVE", url:"https://cartelive.club/player/3/1" },
+        { name:"CARTELIVE S2", url:"https://cartelive.club/player/3/2" },
+        { name:"SPORTSPASS", url:"https://sportspass.fit/soccer/mexico.html" },
+        { name:"STREAM TV", url:"https://stream-xhd.com/live.php?stream=streamtv" },
+        { name:"NET HD", url:"https://dlhd.pk/stream/stream-45.php" },
+        { name:"NET ULTRA", url:"https://cartelive.club/player/1/1" }
+    ];
+
+    const iframe = document.getElementById('liveIframe');
+    const grid = document.getElementById('serversGrid');
+
+    servers.forEach((s, idx) => {
+        const card = document.createElement('div');
+        card.className = 'server-card';
+        card.innerHTML = `<strong>${s.name}</strong>`;
+        card.onclick = () => {
+            document.querySelectorAll('.server-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+            iframe.src = s.url;
+        };
+        grid.appendChild(card);
+        if (idx === 0) card.click();
+    });
+</script>
+</body>
+</html>
