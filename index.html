@@ -15,22 +15,20 @@
         .live-indicator { background: rgba(255, 0, 0, 0.1); color: var(--live-red); padding: 0.4rem 0.8rem; border-radius: 20px; font-weight: bold; font-size: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
         .dot { height: 8px; width: 8px; background-color: var(--live-red); border-radius: 50%; animation: pulse 1.5s infinite; }
         
-        .main-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+        .main-layout { display: flex; flex-direction: column; gap: 1.5rem; }
         .player-wrapper { background: #000; border-radius: 16px; overflow: hidden; border: 1px solid #333; }
         .video-box { position: relative; padding-bottom: 56.25%; }
         .video-box iframe { position: absolute; width: 100%; height: 100%; border: 0; }
 
-        .ad-slot { background: var(--card-bg); border: 1px dashed #333; padding: 1rem; text-align: center; border-radius: 12px; margin-bottom: 1rem; }
+        .ad-slot { background: var(--card-bg); border: 1px solid #333; padding: 1rem; text-align: center; border-radius: 12px; display: flex; justify-content: center; align-items: center; min-height: 280px; }
+        .ad-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         
-        .donation-box { background: var(--card-bg); border-radius: 16px; border: 1px solid #333; padding: 1rem; text-align: center; }
-        .donation-box img { max-width: 120px; border-radius: 8px; margin-top: 0.5rem; }
-
         .servers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.8rem; margin-top: 1.5rem; }
         .server-card { background: var(--card-bg); padding: 0.8rem; border-radius: 10px; cursor: pointer; border: 1px solid #333; text-align: center; transition: 0.2s; }
         .server-card:hover, .server-card.active { border-color: var(--primary); background: #1a0a12; }
 
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-        @media (max-width: 768px) { .main-layout { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .ad-row { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -41,17 +39,19 @@
         <div class="live-indicator"><span class="dot"></span> LIVE NOW</div>
     </div>
 
-    <div class="ad-slot">
-        <script type="text/javascript">
-            atOptions = {
-                'key' : 'b8e349cc7748d1f932a1a6b5f7cbd761',
-                'format' : 'iframe',
-                'height' : 250,
-                'width' : 300,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="https://www.highperformanceformat.com/b8e349cc7748d1f932a1a6b5f7cbd761/invoke.js"></script>
+    <div class="ad-row">
+        <div class="ad-slot">
+            <script type="text/javascript">
+                atOptions = { 'key' : 'b8e349cc7748d1f932a1a6b5f7cbd761', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+            </script>
+            <script type="text/javascript" src="https://www.highperformanceformat.com/b8e349cc7748d1f932a1a6b5f7cbd761/invoke.js"></script>
+        </div>
+        <div class="ad-slot">
+            <script type="text/javascript">
+                atOptions = { 'key' : 'b8e349cc7748d1f932a1a6b5f7cbd761', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+            </script>
+            <script type="text/javascript" src="https://www.highperformanceformat.com/b8e349cc7748d1f932a1a6b5f7cbd761/invoke.js"></script>
+        </div>
     </div>
 
     <div class="main-layout">
@@ -60,24 +60,6 @@
                 <iframe id="liveIframe" src="about:blank" allowfullscreen></iframe>
             </div>
         </div>
-
-        <div class="donation-box">
-            <h3>Support Us</h3>
-            <img src="https://images.v-gen.ai/contentFetch/uploaded:4de72ece-2532-4b9b-97eb-ac5b388a1f2c.jpg-2238e40c-29ce-4e8b-8042-e92469eafb2e" alt="QR">
-        </div>
-    </div>
-
-    <div class="ad-slot">
-        <script type="text/javascript">
-            atOptions = {
-                'key' : 'b8e349cc7748d1f932a1a6b5f7cbd761',
-                'format' : 'iframe',
-                'height' : 250,
-                'width' : 300,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="https://www.highperformanceformat.com/b8e349cc7748d1f932a1a6b5f7cbd761/invoke.js"></script>
     </div>
 
     <div class="servers-grid" id="serversGrid"></div>
